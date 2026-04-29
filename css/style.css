@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Salsa&display=swap");
+
+@font-face {
+  font-family: "Gibs";
+  /* A name for your font */
+  src: url("../fonts/Gibs.ttf") format("truetype");
+  font-weight: normal;
+  /* Optional: specify weight */
+  font-style: normal;
+  /* Optional: specify style */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* No custom layout rules here — layout handled with Tailwind classes in the HTML */

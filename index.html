@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web 7</title>
+
+    <!-- COSTOM LINK -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'lsm': '400px',
+                        'xxsm': '480px',
+                        'sm': '640px',
+                        'md': '768px',
+                        'smd': '991px',
+                        'lg': '1025px',
+                        'xl': '1200px',
+                        '2xl': '1366px',
+                        '3xl': '1536px',
+                        '4xl': '1760px',
+                    },
+                    fontFamily: {
+                        'gibs': ['Gibs', 'cursive'],
+                        'salsa': ['Salsa', 'cursive'],
+                        'sakire': ['Sakire', 'cursive'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <section class="w-full relative overflow-hidden">
+        <img src="./img/hero-bg.png" alt="">
+
+        <img src="./img/c1.png" class="absolute top-[25%] left-[-10%]" id="cloud" alt="">
+        <img src="./img/c3.png" class="absolute top-[0%] left-[20%]" id="cloud" alt="">
+        <img src="./img/c2.png" class="absolute top-[40%] left-[30%]" id="cloud" alt="">
+        <img src="./img/c3.png" class="absolute top-[25%] left-[60%]" id="cloud" alt="">
+        <img src="./img/c1.png" class="absolute top-[10%] right-[-7%]" id="cloud" alt="">
+
+        <div
+            class="font-gibs text-white absolute top-[10%] left-[50%] -translate-x-[50%] flex items-center justify-center gap-2 md:gap-4">
+            <h1 class="text-[24px] lsm:text-[30px] sm:text-[38px] md:text-[44px] lg:text-[52px] xl:text-[60px] 2xl:text-[70px]">Anuragh</h1>
+            <img src="./img/hero-symbol.png" class="w-[20%]" alt="">
+            <h1 class="text-[24px] lsm:text-[30px] sm:text-[38px] md:text-[44px] lg:text-[52px] xl:text-[60px] 2xl:text-[70px]">Sudeshna</h1>
+        </div>
+
+        <!-- <img src="./img/hero-bike.png" id="bike" class="absolute bottom-0 right-0 w-[700px]" alt=""> -->
+    </section>
+
+    <section class="h-screen">
+
+    </section>
+
+    <!-- <footer>
+        <div class="relative z-20 bg-[#E6CC8D] w-full mx-auto md:px-[5rem] px-[20px] 3xl:px-4 py-3">
+            <p class="sarabun-regular font-normal text-black text-center text-[14px] md:text-[18px] 3xl:text-[25px]">
+                ©
+                <span id="year"></span> Wedding. All Rights Reserved. Created by <span
+                    class="text-[#EA0056]">EventsMonial</span>
+            </p>
+        </div>
+    </footer> -->
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!---GSAP JS -->
+    <script src="https://unpkg.com/gsap/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+
+    <!-- lenis -->
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+        try {
+            const lenis = new Lenis({
+                duration: 1.8,
+                easing: (t) => 1 - Math.pow(1 - t, 4),
+                smoothWheel: true,
+            });
+
+            lenis.on('scroll', ScrollTrigger.update);
+
+            gsap.ticker.add((time) => lenis.raf(time * 1000));
+            gsap.ticker.lagSmoothing(0);
+
+            // expose for debugging
+            window.lenis = lenis;
+        } catch (e) {
+            // Lenis not available — fail silently
+        }
+
+        AOS.init({
+            once: false,
+            mirror: true,
+            duration: 300,
+        });
+
+        const yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = fullyear;
+
+
+        const heroSection = document.querySelector('section');
+        const bike = document.getElementById('bike');
+
+        function calcX() {
+            return -window.innerWidth;
+        }
+
+        if (bike && heroSection) {
+
+            const bikeAnim = gsap.to(bike, {
+                scale: 1,
+                x: calcX(),
+                y: -0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: heroSection,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1,
+                    markers: true
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                bikeAnim.vars.x = calcX();
+                bikeAnim.invalidate();
+                ScrollTrigger.refresh();
+            });
+        }
+
+
+        gsap.utils.toArray("#cloud").forEach((cloud, i) => {
+            gsap.to(cloud, {
+                x: i % 2 === 0 ? 100 : -100,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

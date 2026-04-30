@@ -222,9 +222,9 @@
     <section class="w-full relative">
         <img src="./img/couple-bg.png">
 
-        <div class="w-full absolute top-[10%] left-1/2 -translate-x-1/2 text-center text-white flex flex-col gap-4">
-            <h1 class="font-gibs text-[40px]">A message from the couple</h1>
-            <h1 class="font-cantata text-[14px]">
+        <div class="w-full absolute top-[8%] left-1/2 -translate-x-1/2 text-center text-white flex flex-col gap-4">
+            <h1 class="font-gibs text-[52px]">A message from the couple</h1>
+            <h1 class="font-cantata text-[18px]">
                 We are grateful to have the love and support of our family and friends as we begin this new
                 <span class="block">
                     journey together. Your blessings and presence mean everything to us, and we are excited to
@@ -265,15 +265,39 @@
         </div>
     </section>
 
-    <!-- <footer>
-        <div class="relative z-20 bg-[#E6CC8D] w-full mx-auto md:px-[5rem] px-[20px] 3xl:px-4 py-3">
-            <p class="sarabun-regular font-normal text-black text-center text-[14px] md:text-[18px] 3xl:text-[25px]">
+    <section class="w-full relative overflow-hidden" id="bless">
+
+        <img src="./img/c1.png" class="absolute top-[25%] left-[-10%] cloud2" alt="">
+        <img src="./img/c3.png" class="absolute top-[0%] left-[20%] cloud2" alt="">
+        <img src="./img/c2.png" class="absolute top-[40%] left-[30%] cloud2" alt="">
+        <img src="./img/c3.png" class="absolute top-[25%] left-[60%] cloud2" alt="">
+        <img src="./img/c1.png" class="absolute top-[10%] right-[-7%] cloud2" alt="">
+
+        <div class="w-full absolute top-[10%] left-1/2 -translate-x-1/2 text-center text-white flex flex-col gap-4">
+            <h1 class="font-gibs text-[52px]">BLESS THE COUPLE</h1>
+            <h1 class="font-cantata text-[24px]">
+                We would be grateful to receive your heartfelt blessings and good
+
+                <span class="block">
+                    wishes as we begin this new chapter of our lives.
+                </span>
+
+            </h1>
+        </div>
+
+        <img src="./img/bless-bg.png" alt="">
+        <img src="./img/bless-chars.png" class="w-[42%] absolute bottom-0 left-[50%] -translate-x-1/2" alt="">
+    </section>
+
+    <footer>
+        <div class="relative z-20 bg-[#0F004D] w-full mx-auto md:px-[5rem] px-[20px] 3xl:px-4 py-3">
+            <p class="sarabun-regular font-normal text-white text-center text-[14px] md:text-[18px] 3xl:text-[25px]">
                 ©
                 <span id="year"></span> Wedding. All Rights Reserved. Created by <span
                     class="text-[#EA0056]">EventsMonial</span>
             </p>
         </div>
-    </footer> -->
+    </footer>
 
     <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -314,7 +338,7 @@
         });
 
         const yearEl = document.getElementById('year');
-        if (yearEl) yearEl.textContent = fullyear;
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 
         const heroSection = document.querySelector('section');
@@ -354,6 +378,20 @@
                 ease: "none",
                 scrollTrigger: {
                     trigger: "section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        });
+
+        const bless = document.getElementById('bless');
+        gsap.utils.toArray(".cloud2").forEach((cloud, i) => {
+            gsap.to(cloud, {
+                x: i % 2 === 0 ? 120 : -120, // slightly different movement (optional)
+                ease: "none",
+                scrollTrigger: {
+                    trigger: bless,
                     start: "top top",
                     end: "bottom top",
                     scrub: 1
